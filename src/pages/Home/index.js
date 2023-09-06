@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Header, Card, Image, Button, Grid } from "semantic-ui-react";
+import { Icon, Card, Image, Button, Grid } from "semantic-ui-react";
 import { connect } from "react-redux";
 
 class Home extends Component {
