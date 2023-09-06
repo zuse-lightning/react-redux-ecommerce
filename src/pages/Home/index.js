@@ -3,15 +3,20 @@ import { Icon, Card, Image, Button, Grid } from "semantic-ui-react";
 import { connect } from "react-redux";
 
 class Home extends Component {
+
+    handleClick = (id) => {
+        this.props.addToCart(id);
+    }
+
     render() {
         let itemList = this.props.items.map(item => {
             return (
                 <Grid.Column width={4} key={item.id}>
-                    <Card >
+                    <Card>
                         <div id="card-img-container">
                             <Image src={item.img} alt={item.title} />
                             <Card.Header>{item.title}</Card.Header>
-                            <Button to="/"><Icon name="plus" /> Add</Button>
+                            <Button onClick={() => {this.handleClick(item.id)}} to="/"><Icon name="plus" /> Add</Button>
                         </div>
                         <Card.Content>
                             <p>{item.desc}</p>
@@ -39,4 +44,10 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(Home);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addToCart: (id) => { dispatch(addToCart(id)) }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
