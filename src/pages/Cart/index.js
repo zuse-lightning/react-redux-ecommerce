@@ -19,7 +19,9 @@ class Cart extends Component {
     }
 
     render() {
-
+        const { total } = this.props;
+        console.log(total);
+        console.log(this.props.items);
         let addedItems = this.props.items.length ?
             (
                 this.props.items.map(item => {
@@ -51,11 +53,12 @@ class Cart extends Component {
         return (
             <Grid container>
                 <div className="cart">
-                    <Header as="h5">Cart</Header>
+                    <Header as="h3">Cart</Header>
                 </div>
                 <List className="collection">
                     {addedItems}
                 </List>
+                <Header as="h3">{total}</Header>
             </Grid>
         );
     }
@@ -63,7 +66,8 @@ class Cart extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        items: state.addedItems
+        items: state.addedItems,
+        total: state.total
     }
 }
 
