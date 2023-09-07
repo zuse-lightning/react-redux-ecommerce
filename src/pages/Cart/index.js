@@ -1,14 +1,56 @@
 import React, { Component } from "react";
-import { Header } from "semantic-ui-react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { Header, List, Image, Icon, Button, Grid } from "semantic-ui-react";
 
 class Cart extends Component {
     render() {
+
+        let addedItems = this.props.items.length ?
+            (
+                this.props.items.map(item => {
+                    return (
+                        <>
+                            <List.Item className="collection-item-avatar" key={item.id}>
+                                <div className="item-img">
+                                    <Image src={item.img} alt={item.img} />
+                                </div>
+                                <List.Description className="item-desc">
+                                    <Header as="h4" className="title">{item.title}</Header>
+                                    <p>{item.desc}</p>
+                                    <p><b>Price: {item.price}</b></p>
+                                    <p><b>Quantity: {item.quantity}</b></p>
+                                    <div className="add-remove">
+                                        <Link to="/cart"><Icon name="arrow up" /></Link>
+                                        <Link to="/cart"><Icon name="arrow down" /></Link>
+                                    </div>
+                                    <Button color="red" className="remove">Remove</Button>
+                                </List.Description>
+                            </List.Item>
+                        </>
+                    );
+                })
+            ) : (
+                <p>Nothing to see here.</p>
+            );
+
         return (
-            <>
-                <Header as="h3">Cart</Header>
-            </>
+            <Grid container>
+                <div className="cart">
+                    <Header as="h5">Cart</Header>
+                </div>
+                <List className="collection">
+                    {addedItems}
+                </List>
+            </Grid>
         );
     }
 }
 
-export default Cart;
+const mapStateToProps = (state) => {
+    return {
+        items: state.addedItems
+    }
+}
+
+export default connect(mapStateToProps)(Cart);
