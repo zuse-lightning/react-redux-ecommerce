@@ -3,14 +3,17 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+import { configureStore, applyMiddleware, compose } from '@reduxjs/toolkit';
+import reduxThunk from "redux-thunk";
 import { Provider } from 'react-redux';
+
 import cartReducer from "./components/reducers/cartReducer";
 
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
 const store = configureStore({ 
-  reducer: cartReducer,
-  middleware: (getDefaultMiddleware) 
-});
+  reducer: cartReducer  
+}, composeEnhancers(applyMiddleware(reduxThunk)));
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
