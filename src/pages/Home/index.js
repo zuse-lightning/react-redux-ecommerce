@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Icon, Card, Image, Button, Grid } from "semantic-ui-react";
 import { connect } from "react-redux";
+import { addToCart } from "../../components/actions/cartActions";
 
 class Home extends Component {
 

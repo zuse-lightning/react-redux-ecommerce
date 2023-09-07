@@ -4,6 +4,7 @@ import PurplePen from "../../assets/images/purple-pen.png";
 import Umbrella from "../../assets/images/umbrella.png";
 import Socks from "../../assets/images/socks.png";
 import SkyBluePen from "../../assets/images/skyblue-pen.png";
+import { ADD_TO_CART } from "../actions/types/types";
 
 let INITIAL_STATE = {
     items: [
@@ -19,7 +20,28 @@ let INITIAL_STATE = {
 }
 
 const cartReducer = (state = INITIAL_STATE, action) => {
-    return state;
+
+    if (action.type === ADD_TO_CART) {
+        let addedItem = state.items.find(item => item.id === action.id);
+        let existed_item = state.addedItems.find(item => action.id === item.id);
+        if (existed_item) {
+            addedItem.quantity += 1;
+            return {
+                ...state,
+                total: state.total + addedItem.price
+            }
+        } else {
+            addedItem.quantity = 1;
+            let newTotal = state.total + addedItem.price;
+            return {
+                ...state,
+                addedItems: [...state.addedItems, addedItem],
+                total: newTotal
+            }
+        }
+    } else {
+        return state;
+    }
 }
 
 export default cartReducer;
