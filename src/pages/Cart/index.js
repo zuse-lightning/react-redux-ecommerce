@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import { Header, List, Image, Icon, Button, Grid } from "semantic-ui-react";
 import { removeItem, addQuantity, subtractQuantity } from "../../components/actions/cartActions";
 
+import "./style.css";
+
 class Cart extends Component {
 
     handleRemove = (id) => {
@@ -34,9 +36,9 @@ class Cart extends Component {
                                 </div>
                                 <List.Description className="item-desc">
                                     <Header as="h4" className="title">{item.title}</Header>
-                                    <p>{item.desc}</p>
-                                    <p><b>Price: {item.price}</b></p>
-                                    <p><b>Quantity: {item.quantity}</b></p>
+                                    <p className="description">{item.desc}</p>
+                                    <p className="price"><b>Price: {item.price}</b></p>
+                                    <p className="quantity"><b>Quantity: {item.quantity}</b></p>
                                     <div className="add-remove">
                                         <Link to="/cart"><Icon onClick={() => this.handleAddQuantity(item.id)} name="arrow up" /></Link>
                                         <Link to="/cart"><Icon onClick={() => this.handleSubtractQuantity(item.id)} name="arrow down" /></Link>
