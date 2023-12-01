@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { compose } from "@reduxjs/toolkit";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { Header, List, Image, Icon, Button, Grid } from "semantic-ui-react";
@@ -79,4 +80,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Cart);
+export default compose(connect(mapStateToProps, mapDispatchToProps))(Cart);

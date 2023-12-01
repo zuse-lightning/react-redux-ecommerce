@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Icon, Card, Image, Button, Grid } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { addToCart } from "../../components/actions/cartActions";
+import { compose } from "@reduxjs/toolkit";
 
 class Home extends Component {
 
@@ -51,4 +52,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default compose(connect(mapStateToProps, mapDispatchToProps))(Home);
