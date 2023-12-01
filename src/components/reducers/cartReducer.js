@@ -29,9 +29,7 @@ let INITIAL_STATE = {
 const cartReducer = (state = INITIAL_STATE, action) => {
 
     if (action.type === ADD_TO_CART) {
-        let originalItems = JSON.parse(JSON.stringify(state.items));
         let addedItem = state.items.find(item => item.id === action.id);
-        console.log(originalItems === state.items);
         let existed_item = state.addedItems.find(item => action.id === item.id);
         console.log(existed_item);
         if (existed_item) {
@@ -44,9 +42,11 @@ const cartReducer = (state = INITIAL_STATE, action) => {
         } else {
             addedItem.quantity = 1;
             let newTotal = state.total + addedItem.price;
+            let newItems = [...state.addedItems, addedItem];
+            console.log("new items");
             return {
                 ...state,
-                addedItems: [...state.addedItems, addedItem],
+                addedItems: newItems,
                 total: newTotal
             }
         }
@@ -61,8 +61,7 @@ const cartReducer = (state = INITIAL_STATE, action) => {
             total: newTotal
         }
     } else if (action.type === ADD_QUANTITY) {
-        let originalItems = JSON.parse(JSON.stringify(state.items));
-        let addedItem = originalItems.find(item => {
+        let addedItem = state.items.find(item => {
             return item.id === action.id
         });
         addedItem.quantity += 1;
